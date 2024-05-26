@@ -8,14 +8,18 @@ import { userCloud } from "../middlewares/multer.js";
 export const authRouter = Router();
 
 // Registro l'utente
-authRouter.post("/register", async (req, res, next) => {
+authRouter.post("/registration", async (req, res, next) => {
     try {
         let user = await User.create({
             ...req.body,
             password: await bcrypt.hash(req.body.password, 10),
         });
 
-        res.send(user);
+        const token = await generateJWT({
+            _id: user._id
+        })
+
+        res.send({user, token});
     } catch (err) {
         next(err);
     }
