@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ListReviews from './ListReviews';
+import AddReview from './AddReview';
 
 export default function AllReviews({id}) {
 
@@ -23,12 +24,22 @@ export default function AllReviews({id}) {
         getReviews();
     },[]);
 
+    
+
   return (
     <>
-        {data && data.map((reviews) => 
-            <ListReviews key={reviews._id}
-            reviews={reviews} />
-        )}
+    <div className='mt-4' style={{width: "70%"}}>
+        <h2>Recensioni:</h2>
+        <ul className='list-unstyled mt-4 border border-2 rounded px-3 w-75'>
+            {data && data.map((reviews) => 
+                <ListReviews key={reviews._id}
+                reviews={reviews}
+                itemId={id}
+                getReviews={getReviews} />
+            )}
+        </ul>
+        <AddReview id={id} getReviews={getReviews} />
+    </div>
     </>
   )
 }

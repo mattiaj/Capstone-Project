@@ -25,8 +25,8 @@ export default function Login() {
             if(response.ok) {
                 const result = await response.json();
                 localStorage.setItem("user", JSON.stringify(result.user));
-                localStorage.setItem("token", JSON.stringify(result.token));
-                // navigate("/");
+                localStorage.setItem("token", result.token);
+                navigate("/");
                 console.log(result);
             } else {
                 alert("Email o Password errate, Riprova!");

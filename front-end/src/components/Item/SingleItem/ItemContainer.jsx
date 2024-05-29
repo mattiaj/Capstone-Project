@@ -1,9 +1,37 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
 
 export default function ItemContainer({data}) {
 
     console.log(data)
+
+    const postCart = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_ENDPOINT}/cart`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "Application/json"
+                },
+                body: JSON.stringify({
+                    "items":{
+                        "itemId": data._id,
+                        "name": data.name,
+                        "quantity": 1,
+                        "price": data.price
+                    }
+                })
+            });
+
+            if(response.ok) {
+                alert("Prodotto aggiunto al carrello");
+            } else {
+                alert("Non è stato possibile aggiungere il prodotto al carrello!");
+            };
+        } catch (err) {
+            console.error(err);
+        };
+    };
 
   return (
     <>
@@ -17,10 +45,15 @@ export default function ItemContainer({data}) {
                         <p>{data.description}</p>
                     </div>
                 </div>
-                <ul className='list-unstyled'>
-                    <li><strong>Categoria: </strong>{data.category}</li>
-                    <li><strong>Prezzo: </strong>€{data.price}</li>
-                </ul>
+                <div className='d-flex justify-content-between'>
+                    <ul className='list-unstyled'>
+                        <li><strong>Categoria: </strong>{data.category}</li>
+                        <li><strong>Prezzo: </strong>€{data.price}</li>
+                    </ul>
+                    <div>
+                        <Button variant='warning' className='border border-2 border-black rounded-pill' onClick={() => postCart()}><strong>Aggiungi al Carrello</strong></Button>
+                    </div>
+                </div>
             </Row>
         </Col>
         {/* Reviews */}

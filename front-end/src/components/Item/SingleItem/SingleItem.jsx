@@ -33,7 +33,7 @@ export default function SingleItem() {
 
     useEffect(() => {
         getItem();
-        console.log(data)
+        // console.log(data)
     },[]);
 
   return (
