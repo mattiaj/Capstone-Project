@@ -36,24 +36,27 @@ export default function LayoutItem({category, price, image, name, description, i
 
   return (
     <>
-        <Card className='col-lg-3 col-md-4 col-12' style={{width: "18rem"}} >
+        <Card className='col-lg-3 col-md-4 col-12 p-0' style={{width: "18rem"}} >
             <Card.Img variant='top'
             src={image ? image : "https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"}
             className='img-fluid'
-            onClick={() => navigate(`item/details/${id}`)} />
-            <Card.Body>
+            onClick={() => navigate(`item/details/${id}`)}
+            style={{maxHeight: "300px"}} />
+            <Card.Body className='d-flex flex-column justify-content-between'>
                 <Card.Title onClick={() => navigate(`item/details/${id}`)}>{name}</Card.Title>
-                <Card.Text>{description}</Card.Text>
-                <ul className='list-unstyled'>
-                    <li>
-                        <strong>Categoria: </strong>{category}
-                    </li>
-                    <li>
-                        <strong>Prezzo: </strong>€{price}
-                    </li>
+                <Card.Text className='overflow-y-hidden' style={{maxHeight: "100px"}}>{description}</Card.Text>
+                <div>
+                    <ul className='list-unstyled'>
+                        <li>
+                            <strong>Categoria: </strong>{category}
+                        </li>
+                        <li>
+                            <strong>Prezzo: </strong>€{price}
+                        </li>
 
-                </ul>
-                <Button variant='warning' onClick={() => postCart()}><strong>Aggiungi al carrello</strong></Button>
+                    </ul>
+                    <Button variant='warning' onClick={() => postCart()}><strong>Aggiungi al carrello</strong></Button>
+                </div>
             </Card.Body>
         </Card>
     </>

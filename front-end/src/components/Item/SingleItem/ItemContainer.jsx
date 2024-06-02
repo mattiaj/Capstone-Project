@@ -35,14 +35,16 @@ export default function ItemContainer({data}) {
 
   return (
     <>
-        <img className='col-md-5 col-sm-12 border border-2 rounded' src={data.itemImage ? data.itemImage : "https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"} />
+        <img className='col-md-5 col-sm-12 border border-2 rounded p-0'
+        src={data.itemImage ? data.itemImage : "https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"}
+        style={{maxHeight: "500px"}} />
         <Col md={7} sm={12}>
             <Row className='flex-column justify-content-between h-100 ms-2'>
                 <div>
                     <h2 className='mb-4'>{data.name}</h2>
                     <div>
                         <h5>Descrizione prodotto:</h5>
-                        <p>{data.description}</p>
+                        <p className='overflow-y-scroll' style={{maxHeight: "310px"}}>{data.description}</p>
                     </div>
                 </div>
                 <div className='d-flex justify-content-between'>
@@ -56,7 +58,6 @@ export default function ItemContainer({data}) {
                 </div>
             </Row>
         </Col>
-        {/* Reviews */}
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import User from "../models/User.model.js";
+import Item from "../models/Item.model.js";
 import { authMiddleware, generateJWT } from "../middlewares/authorization.js";
 import { userCloud } from "../middlewares/multer.js";
 
@@ -85,6 +86,45 @@ authRouter.patch("/:id/picture", userCloud.single("userPicture"), async (req, re
         );
 
         res.status(201).send(user);
+    } catch (err) {
+        next(err);
+    };
+});
+
+// Get per recuperare le informazioni utente
+authRouter.get("/profile", authMiddleware, async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id);
+        
+        if(user) {
+            res.status(200).send(user);
+        };
+    } catch (err) {
+        next(err);
+    };
+});
+
+authRouter.get("/item", authMiddleware, async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id);
+
+        if(user) {
+            const item = await Item.find({
+                owner: user._id
+            });
+
+            res.status(200).send(item);
+        };
+    } catch (err) {
+        next(err);
+    };
+});
+
+authRouter.delete("/:id", authMiddleware, async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndDelete({_id: req.params.id});
+
+        res.status(204).send("Profilo eliminato!");
     } catch (err) {
         next(err);
     };

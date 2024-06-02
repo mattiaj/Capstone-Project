@@ -34,7 +34,7 @@ export default function NavBar() {
                          <NavDropdown.Item onClick={() => handleDisconnect()} >Disconnettiti</NavDropdown.Item>
                       </NavDropdown> 
                       :
-                      <NavDropdown title="Profilo" id="navbarScrollingDropdown" align={{xs: "start"}}>
+                      <NavDropdown title="Accedi" id="navbarScrollingDropdown" align={{xs: "start"}}>
                           <NavDropdown.Item onClick={() => navigate("/login")} >Accedi</NavDropdown.Item>
                           <NavDropdown.Divider />
                           <NavDropdown.Item onClick={() => navigate("/registration")}>Registrati</NavDropdown.Item>

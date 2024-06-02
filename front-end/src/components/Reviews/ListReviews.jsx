@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PutReview from './PutReview';
 import { Button } from 'react-bootstrap';
 
 export default function ListReviews({reviews, itemId, getReviews}) {
 
     console.log(reviews)
+
+    const [show, setShow] = useState(false);
 
     const deleteReview = async (reviewId) => {
       try {
@@ -31,10 +33,11 @@ export default function ListReviews({reviews, itemId, getReviews}) {
     <>
       <li>Recensione di: <strong>{reviews.owner.username}</strong></li>
       <li className='border-bottom'>{reviews.review}</li>
-      <li>
-        <PutReview review={reviews} itemId={itemId} getReviews={getReviews} />
+      <li className='d-flex justify-content-end py-2'>
+        <Button onClick={() => setShow(true)}>Modifica</Button>
         <Button variant='danger' onClick={() => deleteReview(reviews._id)}>Elimina</Button>
       </li> 
+        <PutReview review={reviews} itemId={itemId} getReviews={getReviews} show={show} setShow={setShow} />
     </>
   )
 }

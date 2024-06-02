@@ -44,15 +44,15 @@ export default function Registration() {
                     if(patch.ok) {
                         const newUser = await patch.json();
                         localStorage.setItem("user", JSON.stringify(result.user));
-                        localStorage.setItem("token", JSON.stringify(result.token));
+                        localStorage.setItem("token", result.token);
                         console.log(newUser);
-                        // navigate("/login");
+                        navigate("/login");
                     };
                 } else {
                     localStorage.setItem("user", JSON.stringify(result.user));
                     localStorage.setItem("token", JSON.stringify(result.token));
                     console.log(result);
-                    // navigate("/login");
+                    navigate("/login");
                 };
             };
         } catch (err) {

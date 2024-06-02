@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
+import CloseButton from 'react-bootstrap/CloseButton';
 
-export default function PutReview({review, itemId, getReviews}) {
+export default function PutReview({review, itemId, getReviews, show, setShow}) {
 
     const [data, setData] = useState(review.review);
 
@@ -18,31 +19,40 @@ export default function PutReview({review, itemId, getReviews}) {
             if(response.ok) {
                 const result = await response.json();
                 getReviews();
-                alert("commento modificato con successo")
+                alert("commento modificato con successo");
             } else {
-                alert("C'è stato un errore nella modifica del commento!")
+                alert("C'è stato un errore nella modifica del commento!");
             };
         } catch (err) {
             console.error(err);
         };
     };
 
+    const handlePut = () => {
+        putReview(data);
+        setShow(false);
+    }
+
   return (
     <>
-        <Form>
-            <Row>
-                <Col md={8} className='pe-0'>
+        <Modal show={show}>
+            <Modal.Header>
+                <Modal.Title>Modifica il commento</Modal.Title>
+                <CloseButton onClick={() => setShow(false)} />
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
                     <Form.Group>
                         <Form.Control type='text'
                         value={data}
                         onChange={(e) => setData(e.target.value)} />
                     </Form.Group>
-                </Col>
-                <Col md={3} className='px-0'>
-                    <Button onClick={() => putReview(data)}>Invia</Button>
-                </Col>
-            </Row>
-        </Form>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={() => handlePut()}>Invia</Button>
+            </Modal.Footer>
+        </Modal>
     </>
   )
 }

@@ -68,7 +68,7 @@ itemRouter.delete("/:id", authMiddleware, async (req, res, next) => {
 
         const item = await Item.findByIdAndDelete({_id: req.params.id});
 
-        res.status(201).send(item, "Articolo eliminato correttamente!");
+        res.status(201).send("Articolo eliminato correttamente!");
     } catch (err) {
         next(err);
     };
