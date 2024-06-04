@@ -8,6 +8,7 @@ export default function AddItem({show, setShow, getItem}) {
         name: "",
         description: "",
         category: "",
+        author: "",
         price: 0,
         itemImage: null
     });
@@ -24,7 +25,8 @@ export default function AddItem({show, setShow, getItem}) {
                     "name": data.name,
                     "description": data.description,
                     "category": data.category,
-                    "price": data.price
+                    "price": data.price,
+                    "author": data.author
                 })
             });
 
@@ -34,7 +36,7 @@ export default function AddItem({show, setShow, getItem}) {
                 if(data.itemImage) {
                     const formData = new FormData();
                     formData.append("itemImage", data.itemImage);
-                    const patch = await fetch(`${process.env.REACT_APP_ENDPOINT}/${result._id}/image`, {
+                    const patch = await fetch(`${process.env.REACT_APP_ENDPOINT}/item/${result._id}/image`, {
                         method: "PATCH",
                         body: formData
                     });
@@ -55,6 +57,14 @@ export default function AddItem({show, setShow, getItem}) {
         postItem();
         setShow(false);
         getItem();
+        setData({
+            name: "",
+            description: "",
+            category: "",
+            author: "",
+            price: 0,
+            itemImage: null
+        })
     };
 
   return (
@@ -77,6 +87,12 @@ export default function AddItem({show, setShow, getItem}) {
                         placeholder='Descrizione prodotto...'
                         value={data.description}
                         onChange={(e) => setData({...data, description: e.target.value})} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control type='text'
+                        placeholder='Nome autore...'
+                        value={data.author}
+                        onChange={(e) => setData({...data, author: e.target.value})} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Control type='text'

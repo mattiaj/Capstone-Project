@@ -37,7 +37,7 @@ export default function ItemContainer({data}) {
     <>
         <img className='col-md-5 col-sm-12 border border-2 rounded p-0'
         src={data.itemImage ? data.itemImage : "https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"}
-        style={{maxHeight: "500px"}} />
+        style={{maxHeight: "500px", maxWidth: "420px"}} />
         <Col md={7} sm={12}>
             <Row className='flex-column justify-content-between h-100 ms-2'>
                 <div>
@@ -49,6 +49,7 @@ export default function ItemContainer({data}) {
                 </div>
                 <div className='d-flex justify-content-between'>
                     <ul className='list-unstyled'>
+                        <li><strong>Autore: </strong>{data.author}</li>
                         <li><strong>Categoria: </strong>{data.category}</li>
                         <li><strong>Prezzo: </strong>€{data.price}</li>
                     </ul>

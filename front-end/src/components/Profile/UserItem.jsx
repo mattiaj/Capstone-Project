@@ -43,6 +43,7 @@ export default function UserItem() {
                 image={item.itemImage}
                 price={item.price}
                 name={item.name}
+                author={item.author}
                 description={item.description}
                 getItem={getItem} /> )}
             </Row>

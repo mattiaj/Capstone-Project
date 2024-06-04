@@ -15,9 +15,7 @@ cartRouter.get("/", authMiddleware, async (req, res, next) => {
 
         if(cart && cart.items.length > 0) {
             res.status(200).send(cart);
-        } else {
-            res.send(null);
-        };
+        } 
 
     } catch (err) {
         next(err);

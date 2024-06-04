@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PutReview from './PutReview';
 import { Button } from 'react-bootstrap';
 
@@ -7,6 +7,11 @@ export default function ListReviews({reviews, itemId, getReviews}) {
     console.log(reviews)
 
     const [show, setShow] = useState(false);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user)
+    
+    const [button, setButton] = useState(false);
 
     const deleteReview = async (reviewId) => {
       try {
@@ -29,13 +34,35 @@ export default function ListReviews({reviews, itemId, getReviews}) {
       };
     };
 
+    const showButton = () => {
+      if(user == null) {
+        setButton(false);
+        return;
+      }
+      if(user._id !== reviews.owner.id) {
+        setButton(false);
+      } else {
+        setButton(true)
+      };
+    };
+
+    useEffect(() => {
+      showButton();
+    },[]);
+
   return (
     <>
       <li>Recensione di: <strong>{reviews.owner.username}</strong></li>
-      <li className='border-bottom'>{reviews.review}</li>
+      <li className='border-bottom d-flex justify-content-between'>
+        {reviews.review}
+        {button &&
+        <div>
+          <Button onClick={() => setShow(true)}>Modifica</Button>
+          <Button variant='danger' onClick={() => deleteReview(reviews._id)}>Elimina</Button>
+        </div>
+        }
+      </li>
       <li className='d-flex justify-content-end py-2'>
-        <Button onClick={() => setShow(true)}>Modifica</Button>
-        <Button variant='danger' onClick={() => deleteReview(reviews._id)}>Elimina</Button>
       </li> 
         <PutReview review={reviews} itemId={itemId} getReviews={getReviews} show={show} setShow={setShow} />
     </>

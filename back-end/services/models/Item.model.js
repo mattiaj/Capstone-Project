@@ -34,6 +34,11 @@ const itemSchema = new Schema(
             required: true
         },
 
+        author: {
+            type: String,
+            required: false
+        },
+
         reviews: [{
                 type: Schema.Types.ObjectId,
                 ref: "Review"

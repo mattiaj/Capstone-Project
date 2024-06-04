@@ -54,11 +54,11 @@ export default function Profile() {
       setShow={setShow} />
       {data && 
         <Container className='mt-5 border-bottom pb-3'>
-            <Row>
-              <Col md={4} xs={12}>
+            <Row className='justify-content-md-between justify-content-center'>
+              <Col lg={4} md={3} xs={12}>
                 <img src={data.userPicture ? data.userPicture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"} className='border border-2 rounded-pill' style={{maxWidth: "350px"}} />
               </Col>
-              <Col md={8} xs={12}>
+              <Col lg={8} md={5} xs={8}>
                 <h1>{data.name} {data.surname}</h1>
                 <p><strong>Username:</strong> {data.username}</p>
                 <p><strong>Email:</strong> {data.email}</p>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import PutItem from './NewItem/PutItem';
 
-export default function ItemCard({id, category, name, description, price, image, getItem}) {
+export default function ItemCard({id, category, name, description, price, image, author, getItem}) {
 
     const [showPut, setShowPut] = useState(false);
 
@@ -26,15 +26,18 @@ export default function ItemCard({id, category, name, description, price, image,
 
   return (
     <>
-        <Card className='col-lg-3 col-md-4 col-12 p-0' style={{width: "18rem"}} >
+        <Card className='col-lg-3 col-md-4 col-12 p-0 d-flex flex-column align-items-center' style={{width: "18rem"}} >
             <Card.Img variant='top'
             src={image ? image : "https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"}
-            className='img-fluid'
-            style={{maxHeight: "300px"}} />
+            className='img-fluid mt-2'
+            style={{maxHeight: "300px", maxWidth: "250px"}} />
             <Card.Body className='d-flex flex-column justify-content-between'>
                     <Card.Title>{name}</Card.Title>
                     <Card.Text className='overflow-y-hidden' style={{maxHeight: "100px"}}>{description}</Card.Text>
                     <ul className='list-unstyled'>
+                        <li>
+                            <strong>Autore: </strong>{author}
+                        </li>
                         <li>
                             <strong>Categoria: </strong>{category}
                         </li>

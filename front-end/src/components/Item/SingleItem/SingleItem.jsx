@@ -39,13 +39,15 @@ export default function SingleItem() {
   return (
     <>
         <Container className='mt-5'>
-            <Row>
+            <Row className='justify-content-center'>
                 {data.length !== 0 &&
                     <ItemContainer key={data._id}
                     data={data} />
                 }
             </Row>
-            <AllReviews id={params.id} />
+            <Row className='justify-content-center'>
+                <AllReviews id={params.id} />
+            </Row>
         </Container>
     </>
   )

@@ -18,14 +18,8 @@ const reviewsSchema = new Schema(
         },
 
         item: {
-            id: {
-                type: Schema.Types.ObjectId,
-                ref: "Item"
-            },
-            name: {
-                type: Schema.Types.String,
-                ref: "Item"
-            }
+            type: Schema.Types.ObjectId,
+            ref: "Item"
         }
     },
 

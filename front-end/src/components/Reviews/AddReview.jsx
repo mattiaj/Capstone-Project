@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import { InputGroup } from 'react-bootstrap';
 
 export default function AddReview({id, getReviews}) {
 
@@ -32,21 +33,15 @@ export default function AddReview({id, getReviews}) {
 
   return (
     <>
-        <Form>
-            <Row>
-                <Col md={8} className='pe-0'>
-                    <Form.Group>
-                        <Form.Control type='text'
-                        placeholder='Inserisci un commento...'
-                        value={review}
-                        onChange={(e) => setReview(e.target.value)} />
-                    </Form.Group>
-                </Col>
-                <Col md={3} className='px-0'>
-                    <Button onClick={() => postReview(review)} >Invia</Button>
-                </Col>
-
-            </Row>
+        <Form style={{width: "75%"}}>
+            <InputGroup>
+                <Form.Control type='text'
+                placeholder='Inserisci un commento...'
+                aria-describedby="basic-addon2"
+                value={review}
+                onChange={(e) => setReview(e.target.value)} />
+                <Button id='basic-addon2' onClick={() => postReview(review)} >Invia</Button>
+            </InputGroup>
         </Form>
     </>
   )

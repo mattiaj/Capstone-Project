@@ -66,7 +66,13 @@ itemRouter.put("/:id", authMiddleware, async (req, res, next) => {
 itemRouter.delete("/:id", authMiddleware, async (req, res, next) => {
     try {
 
-        const item = await Item.findByIdAndDelete({_id: req.params.id});
+        let item = await Item.findById(req.params.id);
+
+        if (item) {
+
+            await Review.deleteMany({item: req.params.id});
+            await Item.findByIdAndDelete({_id: req.params.id})
+        }
 
         res.status(201).send("Articolo eliminato correttamente!");
     } catch (err) {
@@ -105,10 +111,7 @@ itemRouter.post("/:id", authMiddleware, async (req, res, next) => {
                     id: req.user._id,
                     username: req.user.username
                 },
-                item: {
-                    id: item._id,
-                    name: item.name
-                }
+                item: item.id
             });
 
             item.reviews.push(newReview._id);

@@ -40,7 +40,8 @@ export default function AllItems() {
                 image={item.itemImage}
                 price={item.price}
                 name={item.name}
-                description={item.description} />)}
+                description={item.description}
+                author={item.author} />)}
             </Row>
         </Container>
     </>
