@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ItemCard from './ItemCard';
 import AddItem from './NewItem/AddItem';
 import { Row, Button } from 'react-bootstrap';
+import { themeContext } from '../../Context/ThemeContextProvider';
 
 
 export default function UserItem() {
 
     const [data, setData] = useState([]);
     const [show, setShow] = useState(false);
+
+    const {theme} = useContext(themeContext);
 
     const getItem = async () => {
         try {
@@ -33,8 +36,8 @@ export default function UserItem() {
     <>
         <main className='mt-5'>
             <div className='d-flex justify-content-between'>
-                <h1>Articoli Pubblicati:</h1>
-                <Button variant='warning' onClick={() => setShow(true)}>Aggiungi prodotti</Button>
+                <h1 className={theme === "dark" ? "text-light" : ""}>Articoli Pubblicati:</h1>
+                <Button variant={theme === "light" ? "warning" : "outline-warning"} onClick={() => setShow(true)}>Aggiungi prodotti</Button>
             </div>
             <Row className='justify-content-around mt-4'>
                 {data && data.map((item) => <ItemCard key={item._id}

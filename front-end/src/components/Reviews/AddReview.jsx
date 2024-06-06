@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import React, { useContext, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import { InputGroup } from 'react-bootstrap';
+import { themeContext } from '../../Context/ThemeContextProvider';
+import { MdSend } from "react-icons/md";
 
 export default function AddReview({id, getReviews}) {
 
     const [review, setReview] = useState("");
+
+    const {theme} = useContext(themeContext);
 
     const postReview = async (review) => {
         try {
@@ -40,7 +44,7 @@ export default function AddReview({id, getReviews}) {
                 aria-describedby="basic-addon2"
                 value={review}
                 onChange={(e) => setReview(e.target.value)} />
-                <Button id='basic-addon2' onClick={() => postReview(review)} >Invia</Button>
+                <Button variant="dark" id='basic-addon2' onClick={() => postReview(review)} ><MdSend /></Button>
             </InputGroup>
         </Form>
     </>

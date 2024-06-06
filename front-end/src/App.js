@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ThemeContextProvider from './Context/ThemeContextProvider';
 import HomePage from './pages/HomePage';
 import ItemPage from './pages/ItemPage';
 import LoginPage from './pages/LoginPage';
@@ -8,10 +9,17 @@ import RegistrationPage from './pages/RegistrationPage';
 import ProfilePage from './pages/ProfilePage';
 import CartPage from './pages/CartPage';
 import NavBar from './components/NavBar/NavBar';
+import { useEffect } from 'react';
 
 function App() {
+
+  useEffect(() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  },[]);
+
   return (
-    
+    <ThemeContextProvider>
       <BrowserRouter>
       <NavBar />
         <Routes>
@@ -23,6 +31,7 @@ function App() {
           <Route path='/cart' element={<CartPage />} />
         </Routes>
       </BrowserRouter>
+    </ThemeContextProvider>
     
   );
 }

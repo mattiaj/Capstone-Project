@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+
+.background-img {
+  background-image: url(https://volpicase.it/wp-content/uploads/2020/11/le-migliori-librerie-di-milano.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}

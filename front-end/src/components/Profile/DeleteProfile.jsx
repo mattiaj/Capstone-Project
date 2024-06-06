@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { themeContext } from '../../Context/ThemeContextProvider';
+import { FaTrashCan } from "react-icons/fa6";
 
 export default function DeleteProfile({id}) {
 
     const navigate = useNavigate();
+
+    const {theme} = useContext(themeContext);
 
     const deleteProfile = async () => {
         try {
@@ -29,7 +33,7 @@ export default function DeleteProfile({id}) {
 
   return (
     <>
-        <Button variant='danger' onClick={() => deleteProfile()}>Elimina Profilo</Button>
+        <Button variant={theme === "dark" ? "outline-danger" : "danger"} onClick={() => deleteProfile()}><FaTrashCan /> Elimina Profilo</Button>
     </>
   )
 }

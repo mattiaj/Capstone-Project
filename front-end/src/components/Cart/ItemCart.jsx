@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Row } from 'react-bootstrap';
+import { FaTrashCan } from "react-icons/fa6";
+
 
 export default function ItemCart({itemsCart, getCart}) {
 console.log(itemsCart)
@@ -31,9 +33,9 @@ console.log(itemsCart)
         <Row className=' mt-3 justify-content-between align-items-baseline p-3'>
             <h3 className='m-0 col-md-8'>{itemsCart.name}</h3>
             <p className='m-0 col-md-2'><strong>Quantità: </strong>{itemsCart.quantity}</p>
-            <div className='d-flex align-items-baseline col-md-2'>
+            <div className='d-flex align-items-baseline justify-content-between col-md-2'>
                 <p className='mb-0 me-2'><strong>Prezzo: </strong>€{itemsCart.price}</p>
-                <Button variant='danger' size='sm' onClick={() => deleteItem(itemsCart.itemId)}>Elimina</Button>
+                <Button variant='danger' size='sm' onClick={() => deleteItem(itemsCart.itemId)}><FaTrashCan /></Button>
             </div>
         </Row>
         

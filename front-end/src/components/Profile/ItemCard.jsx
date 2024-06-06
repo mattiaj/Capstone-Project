@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { themeContext } from '../../Context/ThemeContextProvider';
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
 import PutItem from './NewItem/PutItem';
 
 export default function ItemCard({id, category, name, description, price, image, author, getItem}) {
 
     const [showPut, setShowPut] = useState(false);
+
+    const {theme} = useContext(themeContext);
 
     const deleteIteme = async () => {
         try {
@@ -26,11 +31,11 @@ export default function ItemCard({id, category, name, description, price, image,
 
   return (
     <>
-        <Card className='col-lg-3 col-md-4 col-12 p-0 d-flex flex-column align-items-center' style={{width: "18rem"}} >
+        <Card className={theme === "light" ? 'col-lg-3 col-md-4 col-12 p-0 mt-3  d-flex flex-column align-items-center' : 'col-lg-3 col-md-4 col-12 p-0 mt-3 d-flex flex-column align-items-center bg-secondary text-light'} style={{width: "18rem"}} >
             <Card.Img variant='top'
             src={image ? image : "https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png"}
             className='img-fluid mt-2'
-            style={{maxHeight: "300px", maxWidth: "250px"}} />
+            style={{maxHeight: "200px", maxWidth: "120px"}} />
             <Card.Body className='d-flex flex-column justify-content-between'>
                     <Card.Title>{name}</Card.Title>
                     <Card.Text className='overflow-y-hidden' style={{maxHeight: "100px"}}>{description}</Card.Text>
@@ -46,8 +51,8 @@ export default function ItemCard({id, category, name, description, price, image,
                         </li>
                     </ul>
                     <div className='d-flex justify-content-end'>
-                        <Button onClick={() => setShowPut(true)}>Modifica</Button>
-                        <Button variant='danger' onClick={() => deleteIteme()}>Elimina</Button>
+                        <Button variant="dark me-2" onClick={() => setShowPut(true)}><FaPencilAlt /></Button>
+                        <Button variant={theme === "light" ? "danger" : "outline-danger"} onClick={() => deleteIteme()}><FaTrashCan /></Button>
                     </div>
             </Card.Body>
         </Card>

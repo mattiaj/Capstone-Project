@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 import CloseButton from 'react-bootstrap/CloseButton';
+import { themeContext } from '../../Context/ThemeContextProvider';
+import { MdSend } from "react-icons/md";
 
 export default function PutReview({review, itemId, getReviews, show, setShow}) {
 
     const [data, setData] = useState(review.review);
+
+    const {theme} = useContext(themeContext);
 
     const putReview = async (comment) => {
         try {
@@ -36,21 +40,22 @@ export default function PutReview({review, itemId, getReviews, show, setShow}) {
   return (
     <>
         <Modal show={show}>
-            <Modal.Header>
+            <Modal.Header className={theme === "dark" ? "bg-dark text-light" : ""}>
                 <Modal.Title>Modifica il commento</Modal.Title>
                 <CloseButton onClick={() => setShow(false)} />
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className={theme === "dark" ? "bg-dark text-light" : ""}>
                 <Form>
                     <Form.Group>
                         <Form.Control type='text'
+                        className={theme === "dark" ? "bg-secondary" : ""}
                         value={data}
                         onChange={(e) => setData(e.target.value)} />
                     </Form.Group>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={() => handlePut()}>Invia</Button>
+            <Modal.Footer className={theme === "dark" ? "bg-dark text-light" : ""}>
+                <Button variant={theme === "light" ? "dark" : "secondary"} onClick={() => handlePut()}><MdSend /></Button>
             </Modal.Footer>
         </Modal>
     </>

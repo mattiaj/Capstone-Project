@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PutReview from './PutReview';
 import { Button } from 'react-bootstrap';
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
+import { themeContext } from '../../Context/ThemeContextProvider';
 
 export default function ListReviews({reviews, itemId, getReviews}) {
 
-    console.log(reviews)
+    const {theme} = useContext(themeContext);
 
     const [show, setShow] = useState(false);
 
@@ -57,8 +60,8 @@ export default function ListReviews({reviews, itemId, getReviews}) {
         {reviews.review}
         {button &&
         <div>
-          <Button onClick={() => setShow(true)}>Modifica</Button>
-          <Button variant='danger' onClick={() => deleteReview(reviews._id)}>Elimina</Button>
+          <Button variant='dark' className='me-2' onClick={() => setShow(true)}><FaPencilAlt /></Button>
+          <Button variant={theme === "light" ? 'danger' : "outline-danger"} onClick={() => deleteReview(reviews._id)}><FaTrashCan /></Button>
         </div>
         }
       </li>

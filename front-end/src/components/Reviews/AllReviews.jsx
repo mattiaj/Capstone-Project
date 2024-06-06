@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { themeContext } from '../../Context/ThemeContextProvider';
 import ListReviews from './ListReviews';
 import AddReview from './AddReview';
 
 export default function AllReviews({id}) {
 
     const [data, setData] = useState([]);
-    // console.log(id)
+
+    const {theme} = useContext(themeContext);
     
     const getReviews = async () => {
         try {
@@ -28,7 +30,7 @@ export default function AllReviews({id}) {
 
   return (
     <>
-    <div className='mt-4 d-flex flex-column align-items-center' style={{width: "70%"}}>
+    <div className={theme === "light" ? 'mt-4 d-flex flex-column align-items-center pb-4 rounded' : 'mt-4 d-flex flex-column align-items-center bg-secondary pb-4 rounded'} style={{width: "70%"}}>
         <h2>Recensioni:</h2>
         <ul className='list-unstyled mt-4 border border-2 rounded px-3 w-75 overflow-y-scroll' style={{maxHeight: "320px"}}>
             {data && data.map((reviews) => 
