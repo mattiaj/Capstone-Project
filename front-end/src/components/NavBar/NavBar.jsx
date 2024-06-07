@@ -27,7 +27,7 @@ export default function NavBar() {
     <>
         <Navbar bg={theme === "light" ? "dark" : "light"} data-bs-theme={theme === "dark" ? "light" : "dark"} sticky='top' >
             <Container>
-                <Navbar.Brand onClick={() => navigate("/")} >Books</Navbar.Brand>
+                <Navbar.Brand onClick={() => navigate("/")} >BOOKS2LIVES</Navbar.Brand>
                 <Navbar.Toggle aria-controls='navbarScroll' />
                 <Navbar.Collapse id='navbarScroll'>
                     <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }}>
